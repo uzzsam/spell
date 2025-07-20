@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpellMaster AI: A Partnership Opportunity</title>
+    <!-- Chosen Palette: Midnight Grimoire (#2C2A4A, #F5F5DC, #D4AF37, #4A4A4A) -->
+    <!-- Application Structure Plan: A single-page, scrolling dashboard designed as a persuasive pitch. The flow guides a potential partner from the high-level market vision to the concrete business model and partnership opportunity. Structure: 1. Hero/Vision, 2. Market Size, 3. Customer Personas, 4. Tech Solution, 5. Business Model, 6. Partnership Ask. This narrative structure is more compelling for a pitch than a simple report layout, building a case for investment by layering evidence of opportunity, customer understanding, a solid plan, and profitability. Interactions like animated charts and clickable cards are used to maintain engagement and make data digestible. -->
+    <!-- Visualization & Content Choices: Market Forecast -> Goal: Show growth -> Viz: Line Chart -> Interaction: Hover tooltips -> Justification: Clearly visualizes trend over time. // Regional Spend -> Goal: Show geographic spread -> Viz: Doughnut Chart -> Interaction: Hover tooltips -> Justification: Easy comparison of market shares. // Demographics -> Goal: Define target audience -> Viz: Bar Chart -> Interaction: Static -> Justification: Simple, clear representation of age/gender splits. // Consumer Personas -> Goal: Demonstrate customer insight -> Viz: Interactive HTML cards -> Interaction: Click-to-reveal -> Justification: Engages user and prevents info overload. // PoD Products -> Goal: Show profitability -> Viz: Horizontal Bar Chart -> Interaction: Hover tooltips -> Justification: Compares product margins effectively. // Process Flow -> Goal: Explain the business logic -> Viz: HTML/CSS diagram -> Interaction: Scroll-based fade-in -> Justification: Simplifies a complex process into a digestible, narrative flow. All charts use Chart.js (Canvas). -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F5F5DC;
+            color: #4A4A4A;
+            font-family: 'Inter', sans-serif;
+        }
+        .font-heading {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .bg-deep-purple { background-color: #2C2A4A; }
+        .text-gold { color: #D4AF37; }
+        .border-gold { border-color: #D4AF37; }
+        .bg-gold { background-color: #D4AF37; }
+        .nav-link.active {
+            color: #D4AF37;
+            border-bottom-color: #D4AF37;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .persona-card {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .persona-card .details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .persona-card.active .details {
+            max-height: 500px;
+            transition: max-height 0.5s ease-in;
+        }
+        .scroll-target {
+            scroll-margin-top: 80px;
+        }
+        .animated-stat {
+            transition: opacity 0.5s, transform 0.5s;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="navbar" class="bg-deep-purple/90 backdrop-blur-sm text-white sticky top-0 z-50 transition-all duration-300 shadow-lg">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-heading font-bold text-gold">SpellMaster AI</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#opportunity" class="nav-link text-lg hover:text-gold border-b-2 border-transparent transition-colors duration-300">Opportunity</a>
+                <a href="#customer" class="nav-link text-lg hover:text-gold border-b-2 border-transparent transition-colors duration-300">The Seeker</a>
+                <a href="#solution" class="nav-link text-lg hover:text-gold border-b-2 border-transparent transition-colors duration-300">Our Solution</a>
+                <a href="#business" class="nav-link text-lg hover:text-gold border-b-2 border-transparent transition-colors duration-300">Business Model</a>
+                <a href="#partner" class="nav-link text-lg hover:text-gold border-b-2 border-transparent transition-colors duration-300">Partnership</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-2xl">☰</button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex flex-col space-y-4">
+            <a href="#opportunity" class="nav-link block text-lg hover:text-gold">Opportunity</a>
+            <a href="#customer" class="nav-link block text-lg hover:text-gold">The Seeker</a>
+            <a href="#solution" class="nav-link block text-lg hover:text-gold">Our Solution</a>
+            <a href="#business" class="nav-link block text-lg hover:text-gold">Business Model</a>
+            <a href="#partner" class="nav-link block text-lg hover:text-gold">Partnership</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="bg-deep-purple text-white min-h-screen flex items-center justify-center text-center px-4 py-20">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-5xl md:text-7xl font-heading font-bold mb-4 text-gold leading-tight">SpellMaster AI</h2>
+                <p class="text-xl md:text-2xl font-heading mb-8 text-gray-300">Where Ancient Mysticism Meets Generative AI</p>
+                <p class="text-lg max-w-2xl mx-auto leading-relaxed">We are pioneering a new category of experiential e-commerce. SpellMaster AI is a unique platform that allows users to co-create personalized spells and enchanted merchandise through conversation with intelligent, mystical AI agents. This is an invitation to partner with us and capture a burgeoning, high-margin market at the intersection of technology and belief.</p>
+                <a href="#opportunity" class="mt-12 inline-block bg-gold text-deep-purple font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-400 transition-colors duration-300 shadow-lg">Discover the Opportunity</a>
+            </div>
+        </section>
+        
+        <section id="opportunity" class="scroll-target py-20 lg:py-32 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-deep-purple mb-4">The Unseen Market</h2>
+                    <p class="text-lg text-gray-600 leading-relaxed">The global appetite for metaphysical and spiritual products is not a fringe interest; it's a substantial, rapidly growing market. Fueled by a new generation's search for personalized spirituality and the massive reach of social media phenomena like #WitchTok, this sector presents a compelling and untapped commercial opportunity.</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8 mb-16 text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-lg animated-stat">
+                        <p class="text-5xl font-bold text-deep-purple mb-2" data-stat-target="10">0</p>
+                        <p class="text-lg font-semibold text-gray-700">Billion USD Core Market in 2024</p>
+                        <p class="text-sm text-gray-500">Excludes broader wellness, focusing on the occult and metaphysical niche.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg animated-stat">
+                        <p class="text-5xl font-bold text-deep-purple mb-2" data-stat-target="8">0</p>
+                        <p class="text-lg font-semibold text-gray-700">% Projected CAGR to 2030</p>
+                        <p class="text-sm text-gray-500">Outpacing general e-commerce growth, driven by digital accessibility.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg animated-stat">
+                        <p class="text-5xl font-bold text-deep-purple mb-2" data-stat-target="41">0</p>
+                        <p class="text-lg font-semibold text-gray-700">Billion+ #WitchTok Views</p>
+                        <p class="text-sm text-gray-500">A powerful indicator of mainstream interest and a primary marketing channel.</p>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="bg-white p-8 rounded-lg shadow-xl">
+                        <h3 class="text-2xl font-heading font-bold text-deep-purple mb-4 text-center">Market Growth Forecast (USD Billions)</h3>
+                        <div class="chart-container">
+                            <canvas id="marketGrowthChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-xl">
+                        <h3 class="text-2xl font-heading font-bold text-deep-purple mb-4 text-center">Global Spend by Region (2024)</h3>
+                        <div class="chart-container">
+                            <canvas id="regionalSpendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="customer" class="scroll-target py-20 lg:py-32">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-deep-purple mb-4">The Modern Seeker</h2>
+                    <p class="text-lg text-gray-600 leading-relaxed">Understanding our customer is key. The modern seeker is digitally native, values authenticity, and desires personalized experiences that speak to their unique journey. This audience is not monolithic; it's a spectrum of motivations, from heartfelt hope to curious exploration, each with a distinct willingness to pay.</p>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+                    <div class="bg-white p-8 rounded-lg shadow-xl">
+                        <h3 class="text-2xl font-heading font-bold text-deep-purple mb-4 text-center">Key Demographics</h3>
+                        <div class="chart-container h-80 md:h-96 max-h-[450px]">
+                            <canvas id="demographicsChart"></canvas>
+                        </div>
+                        <p class="text-center text-gray-600 mt-4">The market is predominantly driven by women (70-80%) and younger generations (18-49), who are actively seeking new forms of spiritual expression and self-care tools.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-heading font-bold text-deep-purple mb-6 text-center">Primary Consumer Personas</h3>
+                        <div class="space-y-4">
+                            <div class="persona-card bg-white rounded-lg shadow-md border-l-4 border-pink-400">
+                                <div class="p-4 flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-deep-purple">♡ The Love Seeker</h4>
+                                    <span class="text-2xl transform transition-transform duration-300">▼</span>
+                                </div>
+                                <div class="details px-4 pb-4">
+                                    <p class="text-gray-600 mb-2"><strong>Motivation:</strong> Finding a soulmate, mending a relationship, or enhancing romance. Often driven by powerful emotions and hope.</p>
+                                    <p class="font-semibold"><strong>Willingness to Pay:</strong> High. This is consistently the top-selling spell category, with customers willing to pay premium prices for personalized rituals.</p>
+                                </div>
+                            </div>
+                            <div class="persona-card bg-white rounded-lg shadow-md border-l-4 border-green-500">
+                                <div class="p-4 flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-deep-purple">💰 The Prosperity Seeker</h4>
+                                    <span class="text-2xl transform transition-transform duration-300">▼</span>
+                                </div>
+                                <div class="details px-4 pb-4">
+                                    <p class="text-gray-600 mb-2"><strong>Motivation:</strong> Career advancement, financial growth, and business success. Views spells as a spiritual investment in their goals.</p>
+                                    <p class="font-semibold"><strong>Willingness to Pay:</strong> Moderate to High. Willing to spend if they perceive a potential return on their spiritual investment.</p>
+                                </div>
+                            </div>
+                            <div class="persona-card bg-white rounded-lg shadow-md border-l-4 border-blue-500">
+                                <div class="p-4 flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-deep-purple">🛡️ The Protection Seeker</h4>
+                                    <span class="text-2xl transform transition-transform duration-300">▼</span>
+                                </div>
+                                <div class="details px-4 pb-4">
+                                    <p class="text-gray-600 mb-2"><strong>Motivation:</strong> Shielding self, home, or loved ones from negativity, harm, or the "evil eye." Driven by a sense of care and anxiety.</p>
+                                    <p class="font-semibold"><strong>Willingness to Pay:</strong> Moderate. Spends on tangible items like amulets and cleansing kits, with WTP rising with perceived threat levels.</p>
+                                </div>
+                            </div>
+                            <div class="persona-card bg-white rounded-lg shadow-md border-l-4 border-red-600">
+                                <div class="p-4 flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-deep-purple">💥 The Curse-Breaker</h4>
+                                    <span class="text-2xl transform transition-transform duration-300">▼</span>
+                                </div>
+                                <div class="details px-4 pb-4">
+                                    <p class="text-gray-600 mb-2"><strong>Motivation:</strong> Desperate to remove a perceived hex or a persistent streak of bad luck. Often acts with a sense of urgency and fear.</p>
+                                    <p class="font-semibold"><strong>Willingness to Pay:</strong> Very High. This persona exhibits the highest WTP, driven by the intense emotional need for relief.</p>
+                                </div>
+                            </div>
+                             <div class="persona-card bg-white rounded-lg shadow-md border-l-4 border-purple-500">
+                                <div class="p-4 flex justify-between items-center">
+                                    <h4 class="text-xl font-bold text-deep-purple">✨ The Curious Dabbler</h4>
+                                    <span class="text-2xl transform transition-transform duration-300">▼</span>
+                                </div>
+                                <div class="details px-4 pb-4">
+                                    <p class="text-gray-600 mb-2"><strong>Motivation:</strong> Entertainment, novelty, and trend-following, often inspired by social media. Sees spellcraft as a fun experience.</p>
+                                    <p class="font-semibold"><strong>Willingness to Pay:</strong> Low. Drives volume on inexpensive, entry-level products and digital downloads. A key source of new market entrants.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="solution" class="scroll-target py-20 lg:py-32 bg-deep-purple text-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-gold mb-4">The Alchemical Engine</h2>
+                    <p class="text-lg text-gray-300 leading-relaxed">Our solution seamlessly blends cutting-edge technology into a mystical, user-friendly experience. We've designed a process that guides the user from initial curiosity to receiving a unique, physical product, all orchestrated by our AI. This is how we turn conversation into commerce.</p>
+                </div>
+                
+                <div class="max-w-2xl mx-auto">
+                    <div class="relative pl-8 border-l-2 border-gold/30 space-y-16">
+                        <div class="process-step">
+                            <div class="absolute -left-5 w-8 h-8 bg-gold rounded-full flex items-center justify-center text-deep-purple font-bold text-lg">1</div>
+                            <h3 class="text-2xl font-heading font-bold text-gold mb-2">Invocation: The Conversation Begins</h3>
+                            <p class="text-gray-300">The user is greeted by a SpellMaster AI agent. Using a sophisticated LLM, the bot engages in a natural, mystical conversation to understand the user's intent, whether for guidance, entertainment, or a custom product.</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="absolute -left-5 w-8 h-8 bg-gold rounded-full flex items-center justify-center text-deep-purple font-bold text-lg">2</div>
+                            <h3 class="text-2xl font-heading font-bold text-gold mb-2">Creation: Co-crafting the Spell</h3>
+                            <p class="text-gray-300">The AI generates personalized content—a spell, an incantation, a sigil—based on the user's input. This content is then used to create a mockup of a unique product, such as a t-shirt, mug, or engraved pendant, presented directly within the chat.</p>
+                        </div>
+                        <div class="process-step">
+                             <div class="absolute -left-5 w-8 h-8 bg-gold rounded-full flex items-center justify-center text-deep-purple font-bold text-lg">3</div>
+                            <h3 class="text-2xl font-heading font-bold text-gold mb-2">Transaction: Seamless Commerce</h3>
+                            <p class="text-gray-300">Once the user approves the custom design, the AI adds the item to a Shopify cart. The entire transaction is handled seamlessly, bridging the gap between conversational AI and a robust, secure e-commerce backend.</p>
+                        </div>
+                        <div class="process-step">
+                             <div class="absolute -left-5 w-8 h-8 bg-gold rounded-full flex items-center justify-center text-deep-purple font-bold text-lg">4</div>
+                            <h3 class="text-2xl font-heading font-bold text-gold mb-2">Fulfillment: From Pixels to Product</h3>
+                            <p class="text-gray-300">The order is automatically routed to a global network of Print-on-Demand (PoD) partners. The unique item is created and shipped directly to the customer, requiring zero inventory on our end and enabling infinite scalability.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="business" class="scroll-target py-20 lg:py-32 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-deep-purple mb-4">The Lucrative Niche</h2>
+                    <p class="text-lg text-gray-600 leading-relaxed">Our business model focuses on high-margin, high-growth segments within the metaphysical market. By leveraging Print-on-Demand, we eliminate inventory risk while capitalizing on the proven demand for personalized apparel, accessories, and home decor. This creates a scalable and profitable revenue engine.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-xl max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-heading font-bold text-deep-purple mb-6 text-center">Top PoD Product Categories & Margins</h3>
+                    <div class="chart-container h-96 max-h-[500px]">
+                        <canvas id="productMarginsChart"></canvas>
+                    </div>
+                     <p class="text-center text-gray-600 mt-6">With gross margins often ranging from 40% to 65%, PoD merchandise offers a healthy profit structure. Our model further enhances this by adding the perceived value of AI-driven personalization, justifying premium pricing.</p>
+                </div>
+                <div class="mt-16 text-center max-w-3xl mx-auto">
+                    <h3 class="text-3xl font-heading font-bold text-deep-purple mb-4">Beyond Products: Building Recurring Revenue</h3>
+                    <p class="text-lg text-gray-600 leading-relaxed">The true long-term value lies in community and continuity. We plan to introduce subscription models, such as a "Spell-of-the-Month" club or access to exclusive content and rituals. This strategy cultivates a loyal user base, drives high lifetime value, and creates a defensible moat for the business.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="partner" class="scroll-target py-20 lg:py-32 bg-deep-purple text-white">
+            <div class="container mx-auto px-6 text-center">
+                 <div class="max-w-3xl mx-auto">
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-gold mb-6">A Partnership Forged in Opportunity</h2>
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed">We are seeking a strategic partner to help us accelerate development, scale operations, and capture this unique market. This is an opportunity to co-create a new category of e-commerce and share in the success of a venture built on strong market trends and innovative technology.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 text-left">
+                        <div class="bg-gray-800/50 p-6 rounded-lg">
+                             <h3 class="text-xl font-bold text-gold mb-3">What We Bring</h3>
+                             <ul class="space-y-3 list-disc list-inside text-gray-300">
+                                <li>A clear vision and a data-validated business plan.</li>
+                                <li>Expertise in AI integration and user experience design.</li>
+                                <li>A scalable, low-risk business model (PoD).</li>
+                                 <li>First-mover advantage in a novel market niche.</li>
+                             </ul>
+                        </div>
+                         <div class="bg-gray-800/50 p-6 rounded-lg">
+                             <h3 class="text-xl font-bold text-gold mb-3">What We Seek in a Partner</h3>
+                             <ul class="space-y-3 list-disc list-inside text-gray-300">
+                                 <li>Strategic investment to accelerate our go-to-market timeline.</li>
+                                 <li>Expertise in e-commerce, logistics, or AI infrastructure.</li>
+                                 <li>Access to new markets or established user communities.</li>
+                                 <li>A shared vision for pioneering the future of interactive commerce.</li>
+                             </ul>
+                        </div>
+                    </div>
+
+                    <p class="mt-12 text-lg text-gray-400">The data is clear, the technology is ready, and the consumers are waiting. Let's build the future of mystical commerce together.</p>
+                    <a href="mailto:contact@spellmaster.ai" class="mt-8 inline-block bg-gold text-deep-purple font-bold py-4 px-10 rounded-full text-xl hover:bg-yellow-400 transition-colors duration-300 shadow-lg">Contact Us to Begin the Conversation</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black text-gray-400 py-6 text-center">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 SpellMaster AI. All Rights Reserved.</p>
+            <p class="text-xs mt-2">All services are for entertainment and spiritual support purposes only. Results not guaranteed.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const marketData = {
+                growth: {
+                    labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+                    data: [10, 10.7, 11.5, 12.4, 13.5, 14.8, 16.5]
+                },
+                regional: {
+                    labels: ['North America', 'Europe', 'Asia-Pacific', 'Latin America', 'Rest of World'],
+                    data: [35, 30, 25, 5, 5]
+                },
+                demographics: {
+                    labels: ['18-29', '30-49', '50+'],
+                    femaleData: [40, 35, 25],
+                    maleData: [30, 40, 30] 
+                },
+                products: {
+                    labels: ['Apparel (T-shirts, Hoodies)', 'Home Decor (Mugs, Posters)', 'Accessories (Jewelry, Bags)', 'Other (Books, etc.)'],
+                    margins: [58, 60, 65, 45]
+                }
+            };
+            
+            Chart.defaults.color = '#4A4A4A';
+            Chart.defaults.font.family = "'Inter', sans-serif";
+            
+            const createChartTooltip = (context) => {
+                let tooltipEl = document.getElementById('chartjs-tooltip');
+
+                if (!tooltipEl) {
+                    tooltipEl = document.createElement('div');
+                    tooltipEl.id = 'chartjs-tooltip';
+                    tooltipEl.innerHTML = '<table></table>';
+                    document.body.appendChild(tooltipEl);
+                }
+
+                const tooltipModel = context.tooltip;
+                if (tooltipModel.opacity === 0) {
+                    tooltipEl.style.opacity = 0;
+                    return;
+                }
+                
+                tooltipEl.classList.remove('above', 'below', 'no-transform');
+                if (tooltipModel.yAlign) {
+                    tooltipEl.classList.add(tooltipModel.yAlign);
+                } else {
+                    tooltipEl.classList.add('no-transform');
+                }
+
+                function getBody(bodyItem) {
+                    return bodyItem.lines;
+                }
+
+                if (tooltipModel.body) {
+                    const titleLines = tooltipModel.title || [];
+                    const bodyLines = tooltipModel.body.map(getBody);
+                    let innerHtml = '<thead>';
+
+                    titleLines.forEach(function(title) {
+                        innerHtml += '<tr><th>' + title + '</th></tr>';
+                    });
+                    innerHtml += '</thead><tbody>';
+
+                    bodyLines.forEach(function(body, i) {
+                        const colors = tooltipModel.labelColors[i];
+                        let style = 'background:' + colors.backgroundColor;
+                        style += '; border-color:' + colors.borderColor;
+                        style += '; border-width: 2px';
+                        const span = '<span style="' + style + '"></span>';
+                        innerHtml += '<tr><td>' + span + body + '</td></tr>';
+                    });
+                    innerHtml += '</tbody>';
+                    
+                    let table = tooltipEl.querySelector('table');
+                    table.innerHTML = innerHtml;
+                }
+                
+                const position = context.chart.canvas.getBoundingClientRect();
+                tooltipEl.style.opacity = 1;
+                tooltipEl.style.position = 'absolute';
+                tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px';
+                tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY + 'px';
+                tooltipEl.style.fontFamily = tooltipModel.options.bodyFont.family;
+                tooltipEl.style.fontSize = tooltipModel.options.bodyFont.size + 'px';
+                tooltipEl.style.fontStyle = tooltipModel.options.bodyFont.style;
+                tooltipEl.style.padding = tooltipModel.padding + 'px ' + tooltipModel.padding + 'px';
+                tooltipEl.style.pointerEvents = 'none';
+                tooltipEl.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                tooltipEl.style.color = 'white';
+                tooltipEl.style.borderRadius = '3px';
+
+                return tooltipEl;
+            };
+
+            const marketGrowthCtx = document.getElementById('marketGrowthChart')?.getContext('2d');
+            if (marketGrowthCtx) {
+                new Chart(marketGrowthCtx, {
+                    type: 'line',
+                    data: {
+                        labels: marketData.growth.labels,
+                        datasets: [{
+                            label: 'Market Size ($B)',
+                            data: marketData.growth.data,
+                            borderColor: '#2C2A4A',
+                            backgroundColor: 'rgba(44, 42, 74, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: '#D4AF37',
+                            pointBorderColor: '#2C2A4A',
+                            pointHoverBackgroundColor: '#FFF',
+                            pointHoverBorderColor: '#D4AF37'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: { beginAtZero: false, grid: { color: 'rgba(0,0,0,0.05)' } },
+                            x: { grid: { display: false } }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                enabled: true,
+                                mode: 'index',
+                                intersect: false,
+                                callbacks: {
+                                    label: function(context) {
+                                        return ` Market Size: $${context.parsed.y}B`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            const regionalSpendCtx = document.getElementById('regionalSpendChart')?.getContext('2d');
+            if (regionalSpendCtx) {
+                new Chart(regionalSpendCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: marketData.regional.labels,
+                        datasets: [{
+                            label: 'Regional Spend',
+                            data: marketData.regional.data,
+                            backgroundColor: ['#2C2A4A', '#5A587A', '#8F8DB3', '#C5C3E0', '#EAEAF2'],
+                            borderColor: '#F5F5DC',
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { padding: 15 } },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.label}: ${context.parsed}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            const demographicsCtx = document.getElementById('demographicsChart')?.getContext('2d');
+            if (demographicsCtx) {
+                new Chart(demographicsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: marketData.demographics.labels,
+                        datasets: [
+                            {
+                                label: 'Female',
+                                data: marketData.demographics.femaleData,
+                                backgroundColor: '#8F8DB3',
+                                borderColor: '#5A587A',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Male & Other',
+                                data: marketData.demographics.maleData,
+                                backgroundColor: '#C5C3E0',
+                                borderColor: '#8F8DB3',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { stacked: true, grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { callback: value => value + '%' } },
+                            y: { stacked: true, grid: { display: false } }
+                        },
+                        plugins: {
+                           legend: { position: 'top' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.dataset.label}: ${context.parsed.x}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            const productMarginsCtx = document.getElementById('productMarginsChart')?.getContext('2d');
+            if (productMarginsCtx) {
+                new Chart(productMarginsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: marketData.products.labels,
+                        datasets: [{
+                            label: 'Average Gross Margin',
+                            data: marketData.products.margins,
+                            backgroundColor: ['#2C2A4A', '#5A587A', '#8F8DB3', '#C5C3E0'],
+                            borderColor: '#F5F5DC',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `Avg. Margin: ${context.parsed.x}%`;
+                                    }
+                                }
+                            }
+                        },
+                         scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 100,
+                                grid: { color: 'rgba(0,0,0,0.05)' },
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%'
+                                    }
+                                }
+                            },
+                            y: {
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+
+            const personaCards = document.querySelectorAll('.persona-card');
+            personaCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const isActive = card.classList.contains('active');
+                    personaCards.forEach(c => {
+                        c.classList.remove('active');
+                        c.querySelector('span').style.transform = 'rotate(0deg)';
+                    });
+                    if (!isActive) {
+                        card.classList.add('active');
+                        card.querySelector('span').style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+
+            const animateStat = (el) => {
+                const target = parseInt(el.dataset.statTarget, 10);
+                let current = 0;
+                const increment = Math.ceil(target / 50);
+                const update = () => {
+                    if (current < target) {
+                        current += increment;
+                        if (current > target) current = target;
+                        el.textContent = current;
+                        requestAnimationFrame(update);
+                    } else {
+                        el.textContent = target;
+                    }
+                };
+                requestAnimationFrame(update);
+            };
+
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.dataset.statTarget) {
+                            animateStat(entry.target);
+                        } else {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            document.querySelectorAll('.animated-stat, .process-step').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                observer.observe(el);
+            });
+            document.querySelectorAll('[data-stat-target]').forEach(el => observer.observe(el));
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.scroll-target, #hero');
+            
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                           link.classList.remove('active');
+                           if(link.getAttribute('href').substring(1) === entry.target.id) {
+                               link.classList.add('active');
+                           }
+                        });
+                    }
+                });
+            }, { rootMargin: '-30% 0px -70% 0px' });
+            
+            sections.forEach(section => navObserver.observe(section));
+
+        });
+    </script>
+</body>
+</html>
